@@ -1,39 +1,32 @@
+local App = require("lib.GalaxyHelper.app")
+local Colors = require("lib.GalaxyHelper.colors")
+local Layout = require("lib.GalaxyHelper.layout")
+
 local dialog = {
     MENU = nil,
 }
 
+function callback_close_dialog(dialog_id)
+    dxutSetDialogVisible(dialog_id, false)
+    sampToggleCursor(false)
+end
 
-function dialog.create_dialog_menu()
-    dialog.MENU = dxutCreateDialog("{FFFFFF}GalaxyHelper")
-    dxutSetDialogBackgroundColor(dialog.MENU, 0x99000000)
-    
-    local RES_X, RES_Y = getScreenResolution()
-    
-    local DIALOG_SIZE_X = 300
-    local DIALOG_SIZE_Y = 250
-    
-    local DIALOG_POS_X = RES_X / 2 - (DIALOG_SIZE_X / 2)
-    local DIALOG_POS_Y = RES_Y / 2 - (DIALOG_SIZE_Y / 2)
-    
-    local BUTTON_SIZE_X = 100
-    local BUTTON_SIZE_Y = 30
-    
+function callback_save_config(dialog_id)
+    sampAddChatMessage(string.format("[%s]: ¡Guardado!", App.name), Colors.SUCCESS)
+    App.config.save()
+    callback_close_dialog(dialog_id)
+end
+
+function dialog.create_menu()
+    dialog.MENU = Layout:new("Menú", 300, 270)
+
+    dialog.MENU:create_checkbox("Desactivar efecto de borracho", App.setting_names.disable_druken_effect)
+    dialog.MENU:create_checkbox("Poner casco automáticamente", App.setting_names.put_helmet)
+
+    dialog.MENU:create_button("Guardar", nil, dialog.MENU.DIALOG_SIZE_Y - 50, callback_save_config)
+
+    dxutSetDialogVisible(dialog.MENU.dialog_id, true)
     sampToggleCursor(true)
-    
-    dxutSetDialogPos(dialog.MENU, DIALOG_POS_X, DIALOG_POS_Y, DIALOG_SIZE_X, DIALOG_SIZE_Y)
-    
-    dxutAddCheckbox(dialog.MENU, 1, "Desactivar efecto de borracho", 10, 10, #"Desactivar efecto de borracho"*9, 20)
-    dxutSetCheckboxColor(dialog.MENU, 1, 0xCCFFFFFF)
-    dxutCheckboxSetChecked(dialog.MENU, 1)
-    
-    dxutAddCheckbox(dialog.MENU, 2, "Casco Automático", 10, 35, #"Casco Automático"*11, 20)
-    dxutCheckboxSetChecked(dialog.MENU, 2)
-    dxutSetCheckboxColor(dialog.MENU, 2, 0xCCFFFFFF)
-    
-    dxutAddButton(dialog.MENU, 12, "X", DIALOG_SIZE_X-18, 0, 15, 15)
-    dxutAddButton(dialog.MENU, 10, "Guardar", DIALOG_SIZE_X/2 - (BUTTON_SIZE_X/2), DIALOG_SIZE_Y-55, BUTTON_SIZE_X, BUTTON_SIZE_Y)
-
-    dxutSetDialogVisible(dialog.MENU, true)
 end
 
 

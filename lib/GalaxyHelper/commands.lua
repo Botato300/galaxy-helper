@@ -1,20 +1,21 @@
-local Dialog = require("dialogs")
+local Dialog = require("lib.GalaxyHelper.dialogs")
+local Colors = require("lib.GalaxyHelper.colors")
+local App = require("lib.GalaxyHelper.app")
 
-function cmd_gh()
-    if not MENU_DIALOG then
-        create_dialog_menu()
+local commands = {}
+
+function commands.cmd_gh()
+    if not Dialog.MENU then
+        Dialog.create_menu()
         return
     end
 
-    dxutSetDialogVisible(MENU_DIALOG, not dxutIsDialogVisible(MENU_DIALOG))
-    sampToggleCursor(dxutIsDialogVisible(MENU_DIALOG))
+    dxutSetDialogVisible(Dialog.MENU.dialog_id, not dxutIsDialogVisible(Dialog.MENU.dialog_id))
+    sampToggleCursor(dxutIsDialogVisible(Dialog.MENU.dialog_id))
 end
 
-function cmd_test()
-    -- setPlayerDrunkenness(PLAYER_HANDLE, 0)
-    -- sampAddChatMessage("borrachera en 0!", Colors.GENERAL)
-
-    -- App.config.save()
-
-    clearWantedLevel(PLAYER_HANDLE)
+function commands.cmd_test(arg)
+    
 end
+
+return commands
