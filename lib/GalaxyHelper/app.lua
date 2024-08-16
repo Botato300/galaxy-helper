@@ -6,11 +6,13 @@ local app = {
     config = {},
     settings = {
         disable_druken_effect = false,
-        put_helmet = false
+        only_red_posters = false,
+        notify_admin_on_duty = false,
     },
     setting_names = {
         disable_druken_effect = "disable_druken_effect",
-        put_helmet = "put_helmet",
+        only_red_posters = "only_red_posters",
+        notify_admin_on_duty = "notify_admin_on_duty",
     }
 }
 
@@ -35,10 +37,12 @@ end
 function app.config.load()
     print("[INFO]: Configuracion cargada.")
     local loaded_cfg = inicfg.load(app.settings, "GalaxyHelper")
-    -- app.settings = loaded_cfg.settings
-    for k, v in pairs(loaded_cfg.settings) do
-        app.settings[k] = v
+
+    if loaded_cfg.settings then
+        loaded_cfg = loaded_cfg.settings
     end
+
+    app.settings = loaded_cfg
 end
 
 return app

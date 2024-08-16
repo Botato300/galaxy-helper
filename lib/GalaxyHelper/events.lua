@@ -7,49 +7,49 @@ local Dialog = require("lib.GalaxyHelper.dialogs")
 local Commands = require("lib.GalaxyHelper.commands")
 local Colors = require("lib.GalaxyHelper.colors")
 
-local settings_menu = {
-    [1] = App.setting_names.disable_druken_effect,
-    [2] = App.setting_names.put_helmet,
-}
-
 local DXUT_EVENTS = {
     CLICKED_CHECKBOX = 1025,
     CLICKED_BUTTON = 257,
 }
 
-local handlers_components = {
-
-}
-
 local function on_event_dxut(dialog_id, event_type, component_id)
     if dialog_id == Dialog.MENU.dialog_id then
         if event_type == DXUT_EVENTS.CLICKED_CHECKBOX then
-            -- falta manejar mejor las acciones para los checkbox, tal cual se hizo con los botones
-            local is_checked = dxutIsCheckboxChecked(dialog_id, component_id)
-
-            App.settings[settings_menu[component_id]] = is_checked
-            dxutSetCheckboxColor(dialog_id, component_id, is_checked and 0xCC7BFC74 or 0xCCFC7474)
-            dxutCheckboxSetChecked(dialog_id, component_id, is_checked)
+            if not Dialog.MENU.components[component_id] then
+                print("[WARNING]: Hay un checkbox no registrado para el evento del dialogo.")
+                return
+            end
+            
+            Dialog.MENU.components[component_id].action(dialog_id, component_id)
         end
     
         if event_type == DXUT_EVENTS.CLICKED_BUTTON then
-            if Dialog.MENU.components[component_id] then
-                Dialog.MENU.components[component_id].action(dialog_id)
-            else
+            if not Dialog.MENU.components[component_id] then
                 print("[WARNING]: Hay un boton no registrado para el evento del dialogo.")
+                return
             end
             
-            if component_id == 10  or component_id == 12 then
-                dxutSetDialogVisible(dialog_id, false)
-                sampToggleCursor(false)
-            end
-
+            Dialog.MENU.components[component_id].action(dialog_id)
         end
     end
 end
 
 local function update_event_keyboard()
     if (isKeyJustPressed(vkeys.VK_1) and isKeyJustPressed(vkeys.VK_LSHIFT)) and not sampIsChatInputActive() then Commands.cmd_gh() end
+
+    -- if isKeyJustPressed(vkeys.VK_LEFT) and not sampIsChatInputActive() and not sampIsDialogActive() then
+    --     sampSendChat("/ver guantera")
+    -- end
+    -- if isKeyJustPressed(vkeys.VK_RIGHT) and not sampIsChatInputActive() and not sampIsDialogActive() then
+    --     sampSendChat("/vender arma 33 5000")
+    -- end
+
+    -- if isKeyJustPressed(vkeys.VK_DOWN) and not sampIsChatInputActive() and not sampIsDialogActive() then
+    --     sampSendChat("/borrarcp")
+    -- end
+    -- if isKeyJustPressed(vkeys.VK_UP) and not sampIsChatInputActive() and not sampIsDialogActive() then
+    --     sampSendChat("/cosechar")
+    -- end
 end
 
 local function update_event_dxut()

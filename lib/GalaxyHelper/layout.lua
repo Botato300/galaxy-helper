@@ -45,13 +45,12 @@ function Layout:calculate_pos_y_checkbox()
     return pos
 end
 
-function Layout:create_checkbox(label, setting_name)
+function Layout:create_checkbox(label, setting_name, callback)
     local component_id = self:generate_component_id()
-    table.insert(self.components, {id = component_id})
+    table.insert(self.components, {id = component_id, action = callback, setting_name = setting_name})
     
     local is_checked = App.settings[setting_name]
     local pos_y = self:calculate_pos_y_checkbox()
-
 
     dxutAddCheckbox(self.dialog_id, component_id, label, 5, pos_y, #label * 12, 20)
     dxutSetCheckboxColor(self.dialog_id, component_id, is_checked and self.color_checked or self.color_unchecked)
