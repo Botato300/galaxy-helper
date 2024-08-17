@@ -27,11 +27,11 @@ function toggle_setting(dialog_id, component_id)
 end
 
 function dialog.create_menu()
-    dialog.MENU = Layout:new("Menú", 500, 270)
+    dialog.MENU = Layout:new("Menú", 270, 270)
 
     dialog.MENU:create_checkbox("Desactivar efecto de borracho", App.setting_names.disable_druken_effect, toggle_setting)
-    dialog.MENU:create_checkbox("Spawnear solo carteles rojo en la Academia de Disparo", App.setting_names.only_red_posters, toggle_setting)
-    dialog.MENU:create_checkbox("Notificar cuando un admin se pone en servicio", App.setting_names.notify_admin_on_duty, toggle_setting)
+    dialog.MENU:create_checkbox("Desactivar carteles verdes", App.setting_names.only_red_posters, toggle_setting)
+    dialog.MENU:create_checkbox("Notificar admins en servicio", App.setting_names.notify_admin_on_duty, toggle_setting)
 
     dialog.MENU:create_button("Guardar", nil, dialog.MENU.DIALOG_SIZE_Y - 50, callback_save_config)
 
