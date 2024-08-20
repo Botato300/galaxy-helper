@@ -41,14 +41,7 @@ local function update_event_keyboard()
     --     sampSendChat("/ver guantera")
     -- end
     -- if isKeyJustPressed(vkeys.VK_RIGHT) and not sampIsChatInputActive() and not sampIsDialogActive() then
-    --     sampSendChat("/vender arma 33 5000")
-    -- end
-
-    -- if isKeyJustPressed(vkeys.VK_DOWN) and not sampIsChatInputActive() and not sampIsDialogActive() then
-    --     sampSendChat("/borrarcp")
-    -- end
-    -- if isKeyJustPressed(vkeys.VK_UP) and not sampIsChatInputActive() and not sampIsDialogActive() then
-    --     sampSendChat("/cosechar")
+    --     sampSendChat("/vender arma 13 5000")
     -- end
 end
 

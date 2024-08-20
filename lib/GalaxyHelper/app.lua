@@ -2,17 +2,19 @@ local inicfg = require("inicfg")
 
 local app = {
     name = "GalaxyHelper",
-    version = "0.1",
+    version = "0.2",
     config = {},
     settings = {
         disable_druken_effect = false,
         only_red_posters = false,
         notify_admin_on_duty = false,
+        enable_farmer_bug = false,
     },
     setting_names = {
         disable_druken_effect = "disable_druken_effect",
         only_red_posters = "only_red_posters",
         notify_admin_on_duty = "notify_admin_on_duty",
+        enable_farmer_bug = "enable_farmer_bug",
     }
 }
 

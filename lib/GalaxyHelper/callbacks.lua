@@ -1,53 +1,51 @@
 local callbacks = {}
 
-local sampEvents = require("samp.events")
+local sampEvents = require("lib.samp.events")
 
 local App = require("lib.GalaxyHelper.app")
 local Colors = require("lib.GalaxyHelper.colors")
 
 function sampEvents.onSetPlayerDrunk(level)
-    -- activar si la opcion esta marcada
-    return false
-end
-
-function sampEvents.onDestroyObject(objectid)
-    -- sampAddChatMessage("obj destruido: " .. objectid, Colors.INFO)
-    -- if objectid == 31 or objectid == 30 then 
-    --     return false
-    -- end
+    if App.settings.disable_druken_effect then return false end
 end
 
 function sampEvents.onCreateObject(_, object)
-    -- if object.modelId == 1585 or object.modelId == 1586 then 
-    --     sampAddChatMessage("no se creo objeto id: " .. object.modelId, Colors.INFO)
-    --     return false 
-    -- end
+    if App.settings.only_red_posters and (object.modelId == 1585 or object.modelId == 1586) then 
+        return false 
+    end
 end
 
 function sampEvents.onMarkersSync(reader, writer)
+    -- posible admin spect, aun pendiente
     -- for _, marker in ipairs(reader) do
-    --     if marker.active and marker.playerId ~= 12 then
-    --         sampAddChatMessage(string.format("id: %d | actived: %s", marker.playerId, tostring(marker.active)), Colors.INFO)
+    --     if marker.active then
+    --         sampAddChatMessage(string.format("id: %d", marker.playerId), Colors.INFO)
     --     end
     -- end
 end
 
 function sampEvents.onSetCheckpoint(position, radius)
-    -- local posX, posY, posZ = getCharCoordinates(PLAYER_PED)
+    if App.settings.enable_farmer_bug then 
+        if math.floor(position.x) == math.floor(-373.34118652344) and math.floor(position.y) == math.floor(-1428.6010742188) then 
+            return
+        end
 
-    -- position.z = position.z + 5
-
-    -- return {position, radius}
+        if math.floor(position.x) ~= math.floor(-310.3219909668) and math.floor(position.y) ~= math.floor(-1344.2666015625) then
+            sampSendChat("/borrarcp")
+            sampSendChat("/cosechar")
+        end
+        return {position, radius+1.9} -- se incrementa el radius para hacerlo acorde al tamaño real del checkpoint
+    end
 end
 
-function sampEvents.onSetPlayerSkillLevel(playerid, skill, level)
-    -- return false
-end
-
-function sampEvents.onSetPlayerColor(playerid, color)
-    local new_color = sampGetPlayerColor(playerid)
-    if new_color == Colors.admin.normal or new_color == Colors.admin.top then
-        sampAddChatMessage(string.format("[%s]: El admin %s [ID: %d] se puso en servicio.", App.name, sampGetPlayerNickname(playerid), playerid), Colors.WARNING)
+function sampEvents.onSetPlayerColor(playerid, color)        
+    if App.settings.notify_admin_on_duty then
+        -- 1241448448 color verde
+        -- -52480 color amarillo
+        -- -10420224 color rojo anaranjado
+        if color == 1241448448 or color == -52480 or color == -10420224 then
+            sampAddChatMessage(string.format("[%s]: El admin %s [ID: %d] se puso en servicio.", App.name, sampGetPlayerNickname(playerid), playerid), Colors.WARNING)
+        end
     end
 end
 
