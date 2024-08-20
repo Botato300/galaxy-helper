@@ -13,7 +13,7 @@ end
 
 function callback_save_config(dialog_id)
     App.config.save()
-    sampAddChatMessage(string.format("[%s]: ¡Guardado!", App.name), Colors.SUCCESS)
+    sampAddChatMessage(string.format("[%s]: Configuración guardada.", App.name), Colors.SUCCESS)
     callback_close_dialog(dialog_id)
 end
 
@@ -32,6 +32,7 @@ function dialog.create_menu()
     dialog.MENU:create_checkbox("Desactivar efecto de borracho", App.setting_names.disable_druken_effect, toggle_setting)
     dialog.MENU:create_checkbox("Desactivar carteles verdes", App.setting_names.only_red_posters, toggle_setting)
     dialog.MENU:create_checkbox("Notificar admins en servicio", App.setting_names.notify_admin_on_duty, toggle_setting)
+    dialog.MENU:create_checkbox("Activar bug de Granjero", App.setting_names.enable_farmer_bug, toggle_setting)
 
     dialog.MENU:create_button("Guardar", nil, dialog.MENU.DIALOG_SIZE_Y - 50, callback_save_config)
 
