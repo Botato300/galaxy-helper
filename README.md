@@ -1,9 +1,14 @@
 ### Galaxy Helper
-Es un script que realiza modificaciones del lado del cliente para el videojuego SA-MP (San Andreas Multiplayer) para multi propósitos.
+This is a script that performs client-side modifications to the SA-MP (San Andreas Multiplayer) videogame for multi-purposes.
 
-## Características
-- Notifica administradores en servicio.
-- Automatiza ciertas acciones para que no tengas que hacerlas tú.
-- Hace uso de algunos exploits del servidor.
-- Atajos para activar/desactivar cada característica.
-- Guardado de la configuración.
+## Features
+- Notifies administrators on duty.
+- Automates certain actions so you don't have to do them yourself.
+- Makes use of some server exploits.
+- Shortcuts to enable/disable each feature.
+- Saves your settings.
+
+## Preview
+*GalaxyHelper menu image*
+
+![image](https://github.com/user-attachments/assets/fa47b882-be47-4b8c-91cb-6ff42a0e9f7b)
