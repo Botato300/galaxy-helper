@@ -8,7 +8,7 @@ herramientas, automatizaciones, exploits, etc.
 - Utiliza algunos exploits del servidor.
 - Atajos para activar/desactivar cada función.
 
-## Preview
+## Vista Previa
 *imagen del menú de GalaxyHelper*
 
 ![image](https://github.com/user-attachments/assets/fa47b882-be47-4b8c-91cb-6ff42a0e9f7b)
