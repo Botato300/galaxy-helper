@@ -2,7 +2,7 @@
 Es un mod multipropósito que realiza modificaciones del lado del cliente para el videojuego SA-MP (San Andreas Multiplayer), esto incluye
 herramientas, automatizaciones, exploits, etc.
 
-## Features
+## Características
 - Notifica cuando hay administradores conectados.
 - Automatiza ciertas acciones para que no tengas que hacerlas tú mismo.
 - Utiliza algunos exploits del servidor.
