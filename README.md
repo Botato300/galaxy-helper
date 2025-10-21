@@ -1,4 +1,4 @@
-### Galaxy Helper
+# Galaxy Helper
 Es un mod multipropósito que realiza modificaciones del lado del cliente para el videojuego SA-MP (San Andreas Multiplayer), esto incluye
 herramientas, automatizaciones, exploits, etc.
 
